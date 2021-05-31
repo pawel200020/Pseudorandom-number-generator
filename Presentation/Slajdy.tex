@@ -5,6 +5,8 @@
 \usepackage[sfdefault]{roboto}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{hyperref}
+
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -23,6 +25,10 @@
 \usepackage{ragged2e}
 \usepackage{schemabloc}
 \usepackage{hyperref}
+
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
 \usebackgroundtemplate{
 \includegraphics[width=\paperwidth,height=\paperheight]{assets/background.jpg}}%change this to your preferred background for the presentation.
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -46,11 +52,76 @@
  \frametitle{TABLE OF CONTENTS}
  \tableofcontents
 \end{frame}
-\section{Opis teoretyczny problemu}
+\section{Wprowadzenie}
 \begin{frame}
-  \frametitle{Wprowadzenie}
-  
+  \frametitle{Cel Projektu}
+  Celem projektu jest stworzenie generatora całkowitych liczb pseudolosowych o rozkładzie równomiernym. Na podstawie stworzonego generatora należy stworzyć generatory o rozkładzie jednostajnym (na przedziale [0,1]), Bernoulliego, dwumianowego, Poissona, wykładniczego i normalnego. Następnie należy przetestować powstałe generatory.
 \end{frame}
-    
+\begin{frame}
+  \frametitle{Wprowadzenie, opis problemu}
+  \begin{block}{Definicja}
+    \textbf{Generator liczb pseudolosowych} – program lub podprogram, który na podstawie niewielkiej ilości informacji generuje deterministycznie ciąg bitów, który pod pewnymi względami jest nieodróżnialny od ciągu uzyskanego z prawdziwie losowego źródła.
+    \end{block}
 
+  Generator liczb pseudolosowych nie bez powodu jest \textbf{pseudolosowy}, problem z otrzymaniem liczb losowych wynika z deterministycznego charakteru komputera i wykonywanych przez niego operacji. Gdy człowiek dokonuje rzutu kością, nie wie co wypadnie. Taka sama operacja na komputerze wymaga działania, którego wynik jest nieprzewidywalny – żadna z operacji wykonywanych przez procesor nie posiada takiej cechy.
+
+  Problem starano się rozwiązać wykorzystując zewnętrzne źródła sygnałów losowych (np. generatory białego szumu ), jednakże w tego typu urządzenia nie są standardowo wyposażano komputery osobiste. Próbowano także wykorzystać szumy kart dźwiękowych, jednakże system ten nie rozpowszechnił się z prostej przyczyny – różne karty dźwiękowe szumią różnie, a te z górnej półki nie szumią prawie wcale.
+\end{frame}
+\section{Sposoby generowania liczb pseudolosowych}
+\begin{frame}
+  \frametitle{Sposoby generowania liczb pseudolosowych}
+  Jest wiele sposobów generowania liczb pseudolosowych. Jedną z grup generatorów są generatory liniowe. tworzą ciąg liczb według schematu:
+  \begin{equation*}
+    X_{n+1}= (a_1X_n+a_2X_{n-1}+\ldots+a_kX_{n-k+1}+c)mod(m)
+  \end{equation*}
+  gdzie $a_1$,\ldots,$a_k$, $c$, $m$ -parametry generatora (ustalone liczby)
+
+  Generatory używające operacji modulo nazywamy \textbf{kongruencyjnymi}. Każdy kolejny wyraz (liczba pseudolosowa) w generatorze liniowym to suma pewnych poprzednich wyrazów pomnożonych każdy z każdą o jakiś skalar i brane z nich jest modulo. 
+  
+  Generator mulitplikatywny tworzy liczby według schmatu:
+  \begin{equation*}
+    X_{i+1}=(aX_{i}+c)mod(m) \iff c=0
+  \end{equation*}
+Kolejny wyraz tworzymy po przez pomnożenie poprzedniego przez jakiś skalar. Gdy $c \neq  0$ to generator jest kongurentnie mieszany.
+\end{frame}
+\section{Własny generator}
+\begin{frame}
+  \frametitle{Własny generator}
+    Swój generator postanowiłem zbudować na bazie generatora mulitplikatywnego. Jest to jeden z łatwiejszych generatorów, prosty do implementacji. 
+    
+    Posiada on niestety dwie poważne wady:
+    \begin{enumerate}
+      \item Gererator generuje liczby ciągu w sposób deterministyczny przez co łatwo jest wyliczyć kolejną liczbę.
+      \item Wybierając złe czynniki możemy spowodować, że okres generatora będzie mały przez co będzie działał niepoprawnie lub będzie generował bardzo mało liczb losowych.
+      \item Generowane liczby lokalizują się na hiperpłaszczyznach, których położenie uzależnione jest od parametrów generatora.
+    \end{enumerate} 
+    \begin{figure}[h]
+      \begin{center}
+      \includegraphics[width=0.2\textwidth]{assets/1.PNG}
+      \end{center}
+      \end{figure}
+    Przez wyżej wymienione czynniki nie może być on stosowany w kryptografii.
+\end{frame}
+\begin{frame}
+  \frametitle{Własny generator}
+  Przed zaimplementowaniem pozostał jeszcze wybór $m$ oraz $a$ dla naszego generatora.
+
+  Niech $m=2^{32}$, jest to liczba o 1 większa od zakresu unsigned int'a, dzięki czemu nasza kongruencja potencjalnie będzie mogła zwracać wszyskie liczby które jesteśmy w stanie zapisać na 4 bajtach int'a. 
+\end{frame}
+
+
+
+
+
+
+
+\section{Sources}
+\begin{frame}
+  \frametitle{Sources}
+  \begin{itemize}
+    \item \url{http://home.agh.edu.pl/~chwiej/mn/generatory_16.pdf}
+    \item \url{https://pl.wikipedia.org/wiki/Generator_liczb_pseudolosowych}
+    \item \url{https://eduinf.waw.pl/inf/alg/001_search/0022.php}
+  \end{itemize}
+\end{frame}
 \end{document}

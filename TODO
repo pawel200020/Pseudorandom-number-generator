@@ -1,9 +1,10 @@
-Opis teoretyczny problemu
-    Czego dotyczy projekt
-    sformułować cel
-    opisać formalnie problem (Językiem RPS'u)
-    hipotezy badawcze
-Implemetacja rozwiązania
+Opis teoretyczny problemu [PASS]
+    Czego dotyczy projekt [PASS]
+    sformułować cel [PASS]
+    *Ciekawostka* [PASS]
+    opisać formalnie problem (Językiem RPS'u) [PASS]
+    hipotezy badawcze [NOT NECESSARY]
+Implemetacja rozwiązania [WORKING]
     zestaw kodów źródłowych
 Eksperymeny
     opisać zbiory danych 

@@ -1,46 +1,57 @@
 \documentclass[9pt]{beamer}
+
 % Created By Gouthaman KG
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-% Use roboto Font (recommended)
-\usepackage[sfdefault]{roboto}
+
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{hyperref}
+\usepackage{listings}
 
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-% Define where theme files are located. ('/styles')
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
 \usepackage{styles/fluxmacros}
 \usefolder{styles}
-% Use Flux theme v0.1 beta
-% Available style: asphalt, blue, red, green, gray 
 \usetheme[style=asphalt]{flux}
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-% Extra packages for the demo:
 \usepackage{booktabs}
 \usepackage{colortbl}
 \usepackage{ragged2e}
 \usepackage{schemabloc}
 \usepackage{hyperref}
-
-\usepackage[T1]{fontenc}
-\usepackage[polish]{babel}
-\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsopn} 
+\usepackage{amsmath, amstext}
 \usebackgroundtemplate{
-\includegraphics[width=\paperwidth,height=\paperheight]{assets/background.jpg}}%change this to your preferred background for the presentation.
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-% Informations
+\includegraphics[width=\paperwidth,height=\paperheight]{assets/background.jpg}}
 \title{Generator liczb losowych}
-
-\author{Pawel Pycinski}
-\institute{Uniwesytet Jagielloński}
-\titlegraphic{assets/uj3.jpg} %change this to your preferred logo or image(the image is located on the top right corner).
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\subtitle{Projekt na \textit{Rachunek Prawdopodobieństa i Statystyka}}
+\author{Paweł Pyciński}
+\institute{Uniwersytet Jagielloński}
+\titlegraphic{assets/uj3.jpg}
 
 \begin{document}
 
@@ -52,6 +63,7 @@
  \frametitle{TABLE OF CONTENTS}
  \tableofcontents
 \end{frame}
+
 \section{Wprowadzenie}
 \begin{frame}
   \frametitle{Cel Projektu}
@@ -113,13 +125,23 @@ Kolejny wyraz tworzymy po przez pomnożenie poprzedniego przez jakiś skalar. Gd
     \end{center}
     \end{figure}
 \end{frame}
+\section{Własny generator - kod źródłowy}
+ \begin{frame}[containsverbatim]
+  \frametitle{Własny generator - kod źródłowy}
+   \begin{lstlisting}[language=Python, caption=Klasa generatora]
+    class generator:
 
+        def __init__(self, seed):
+            self.value = seed
+            self.a = 747796405
+            self.m = 4294967296
 
-
-
-
-
-
+        def generateRandom(self):
+            self.value = (self.a*self.value) % self.m
+            return self.value
+    \end{lstlisting}
+    Klasa generatora posiada konstruktor który jako argument przyjmuje ziarno czyli dowoloną liczbę początkową która rozpocznie budowanie pseudolosowy ciąg. Jest także metoda która zwaraca kolejną wygenerowaną liczbę.
+\end{frame}
 \section{Sources}
 \begin{frame}
   \frametitle{Sources}
@@ -127,6 +149,7 @@ Kolejny wyraz tworzymy po przez pomnożenie poprzedniego przez jakiś skalar. Gd
     \item \url{http://home.agh.edu.pl/~chwiej/mn/generatory_16.pdf}
     \item \url{https://pl.wikipedia.org/wiki/Generator_liczb_pseudolosowych}
     \item \url{https://eduinf.waw.pl/inf/alg/001_search/0022.php}
+    \item \url{https://www.ams.org/journals/mcom/1999-68-225/S0025-5718-99-00996-5/S0025-5718-99-00996-5.pdf}
   \end{itemize}
 \end{frame}
 \end{document}

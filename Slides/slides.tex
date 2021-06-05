@@ -142,6 +142,39 @@ Kolejny wyraz tworzymy po przez pomnożenie poprzedniego przez jakiś skalar. Gd
     \end{lstlisting}
     Klasa generatora posiada konstruktor który jako argument przyjmuje ziarno czyli dowoloną liczbę początkową która rozpocznie budowanie pseudolosowy ciąg. Jest także metoda która zwaraca kolejną wygenerowaną liczbę.
 \end{frame}
+\section{Modyfikacje generatora dla uzyskania zadanych rozkładów}
+\begin{frame}[containsverbatim]
+  \frametitle{Rozkład jednostajny}
+  Aby uzyskać liczby z rozkładu jednostajnego na przedziale $[0,1]$ wystarczy podzielić przez ustalone wcześniej $m=4294967296$, zauważmy że po takiej operacji największą liczbą możliwą do uzyskania będzie 1, natomiast pozostałe liczby będą należały to przedziału $[0,1]$.
+  \begin{lstlisting}[language=Python, caption=Metoda rozkładu jednostajnego]
+    def uniformDistribution(self):
+        return self.generateRandom()/self.m
+    \end{lstlisting}
+\end{frame}
+\begin{frame}[containsverbatim]
+  \frametitle{Rozkład Bernoulliego}
+  Rozkład Bernoulliego, jest rozkładem dwupunktowym, aby uzyskać ten rozkład skorzystam z metody którą przygotowałem dla rozkładu jednostajnego. Ustalmy dowolne $P\in [0,1]$. Jeśli wylosowana liczba przez metodę rozkładu jednostajnego będzie mniejsza od p to zwrócimy 0, w przeciwnym razie 1.
+  \begin{lstlisting}[language=Python, caption=Metoda rozkładu Bernoulliego]
+    def bernoulliDistribution(self, probability):
+        rand = self.uniformDistribution()
+        if ( rand<= probability):
+            return 0
+        else:
+            return 1
+    \end{lstlisting}
+\end{frame}
+\begin{frame}[containsverbatim]
+  \frametitle{Rozkład Dwumianowy}
+  Rozkład dwumianowy jest to liczba sukcesów w $n$ próbach Bernoulliego. W implementacji wykorzystałem wcześniej przygotowaną metodę generowania próby Bernoulliego, wywołanie jej $samples$ razy daje nam rozkład Dwumianowy
+  \begin{lstlisting}[language=Python, caption=Metoda rozkładu Dwumianowego]
+    def binomialDistribution(self,probablity, n):
+        counter = 0
+        for i in range(n):
+            counter+=self.bernoulliDistribution(probablity)
+        return counter
+    \end{lstlisting}
+\end{frame}
+
 \section{Sources}
 \begin{frame}
   \frametitle{Sources}

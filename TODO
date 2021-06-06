@@ -4,13 +4,13 @@ Opis teoretyczny problemu [PASS]
     *Ciekawostka* [PASS]
     opisać formalnie problem (Językiem RPS'u) [PASS]
     hipotezy badawcze [NOT NECESSARY]
-Implemetacja rozwiązania [WORKING]
+Implemetacja rozwiązania [DONE]
     zestaw kodów źródłowych
 Eksperymeny
-    opisać zbiory danych 
-    scharakteryzować zbiór danych
-    (opcjonalne) opisać procedury obróbki danych
-    przebieg eksperymenu
+    opisać zbiory danych [DONE]
+    scharakteryzować zbiór danych [DONE]
+    (opcjonalne) opisać procedury obróbki danych [DONE]
+    przebieg eksperymenu [DONE]
 Interpretacja wyników
     przedstawić obserwacje
     odpowiedzieć na hipotezy badawcze

@@ -57,6 +57,7 @@ class generator:
         return x*s
 
 
+#!!!!Dla dużych liczb należy wykomentować wypisanie wartości!!!!
 
 #przedstawienie działania podstawowej wersji generatora
 # a = arr.array('d')
@@ -74,7 +75,7 @@ class generator:
 #przedstawienie działania zmodyfikowanej wersji dla rozkładu jednostajnego
 # b = arr.array('d')
 # object = generator(2)
-# HowManyResults=1000
+# HowManyResults=100000
 # for i in range(HowManyResults):
 #     b.append(object.uniformDistribution())
 
@@ -116,8 +117,8 @@ class generator:
 #przedstawienie działania zmodyfikowanej wersji dla rozkładu poissona
 # e = arr.array('d')
 # object = generator(2)
-# HowManyResults=1000
-# lambdapoiss=4
+# HowManyResults=100000
+# lambdapoiss=5
 # for i in range(HowManyResults):
 #     e.append(object.poissonDistribution(lambdapoiss))
 
@@ -143,12 +144,12 @@ class generator:
 #przedstawienie zmodyfikowanej wersji dla rozkładu normalnego
 # g = arr.array('d')
 # object = generator(2)
-# HowManyResults=1000
+# HowManyResults=100
 # for i in range(HowManyResults):
 #     g.append(object.normalDistribution())
 
 # for i in range(HowManyResults):
 #     print(g[i])
 
-# plt.hist(g, bins=50)
+# plt.hist(g, bins=20)
 # plt.show()

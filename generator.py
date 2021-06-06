@@ -1,9 +1,12 @@
 import numpy as np
 from matplotlib import pyplot as plt
 import array as arr
+import math
 
 
 class generator:
+    whichOne = 0
+    prevValue = 0
 
     def __init__(self, seed):
         self.value = seed
@@ -16,19 +19,44 @@ class generator:
 
     def uniformDistribution(self):
         return self.generateRandom()/self.m
-    
+
     def bernoulliDistribution(self, probability):
         rand = self.uniformDistribution()
-        if ( rand<= probability):
+        if (rand <= probability):
             return 0
         else:
             return 1
 
-    def binomialDistribution(self,probablity, n):
-        counter = 0
-        for i in range(n):
-            counter+=self.bernoulliDistribution(probablity)
-        return counter
+    def poissonDistribution(self, lambdapoiss):
+        limit = math.exp(-lambdapoiss)
+        n = 0
+        p = self.uniformDistribution()
+        while(p >= limit):
+            n += 1
+            p *= self.uniformDistribution()
+        return n
+
+    def exponentialDistribution(self):
+        return -math.log(1-self.uniformDistribution())
+
+    def normalDistribution(self):
+        if(self.whichOne == 1):
+            self.whichOne = 0
+            return self.prevValue
+        else:
+            x = self.uniformDistribution()*2-1
+            y=self.uniformDistribution()*2-1
+            s=x*x+y*y
+            while (s>=1 or s==0):
+                x = self.uniformDistribution()*2-1
+                y=self.uniformDistribution()*2-1
+                s=x*x+y*y
+            s=math.sqrt((math.log(s)*(-2))/s)
+            self.prevValue=y*s
+            self.whichOne=1
+        return x*s
+
+
 
 #przedstawienie działania podstawowej wersji generatora
 # a = arr.array('d')
@@ -71,17 +99,56 @@ class generator:
 # plt.show()
 
 #przedstawienie działania zmodyfikowanej wersji dla rozkładu dwumianowego
-d = arr.array('d')
-object = generator(2)
-HowManyResults=10000
-probablity = 0.5
-samples=10
-for i in range(HowManyResults):
-    d.append(object.binomialDistribution(probablity,samples))
+# d = arr.array('d')
+# object = generator(2)
+# HowManyResults=10000
+# probablity = 0.5
+# samples=10
+# for i in range(HowManyResults):
+#     d.append(object.binomialDistribution(probablity,samples))
 
-for i in range(HowManyResults):
-    print(d[i])
+# for i in range(HowManyResults):
+#     print(d[i])
 
-plt.hist(d, bins=10)
-plt.show()
+# plt.hist(d, bins=10)
+# plt.show()
 
+#przedstawienie działania zmodyfikowanej wersji dla rozkładu poissona
+# e = arr.array('d')
+# object = generator(2)
+# HowManyResults=1000
+# lambdapoiss=4
+# for i in range(HowManyResults):
+#     e.append(object.poissonDistribution(lambdapoiss))
+
+# for i in range(HowManyResults):
+#     print(e[i])
+
+# plt.hist(e, bins=20)
+# plt.show()
+
+#przedstawienie zmodyfikowanej wersji dla rozkładu wykładniczego
+# f = arr.array('d')
+# object = generator(2)
+# HowManyResults=1000
+# for i in range(HowManyResults):
+#     f.append(object.exponentialDistribution())
+
+# for i in range(HowManyResults):
+#     print(f[i])
+
+# plt.hist(f, bins=50)
+# plt.show()
+
+#przedstawienie zmodyfikowanej wersji dla rozkładu normalnego
+# g = arr.array('d')
+# object = generator(2)
+# HowManyResults=1000
+# for i in range(HowManyResults):
+#     g.append(object.normalDistribution())
+
+# for i in range(HowManyResults):
+#     print(g[i])
+
+# plt.hist(g, bins=50)
+# plt.show()

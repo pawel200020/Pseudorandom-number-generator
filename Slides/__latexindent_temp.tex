@@ -48,8 +48,7 @@
 \usebackgroundtemplate{
 \includegraphics[width=\paperwidth,height=\paperheight]{assets/background.jpg}}
 \title{Generator liczb losowych}
-\subtitle{Projekt na przedmot}
-\subtitle{Rachunek Prawdopodobieństa i Statystyka}
+\subtitle{Projekt na \textit{Rachunek Prawdopodobieństa i Statystyka}}
 \author{Paweł Pyciński}
 \institute{Uniwersytet Jagielloński}
 \titlegraphic{assets/uj3.jpg}
@@ -178,7 +177,7 @@ Kolejny wyraz tworzymy po przez pomnożenie poprzedniego przez jakiś skalar. Gd
 \end{frame}
 \begin{frame}[containsverbatim]
   \frametitle{Rozkład Poissona}
-  Rozkład Poissona modeluje zdarzenia rzadkie. Jest on parameryzowany zmienną $\lambda$ która jest równa oczekiwanej liczbie zdarzeń w danym przedziale czasu. Jest wiele algorytmów generujących ten rozkład na potrzeby naszego generatora wystaczy zastosować najprostszy z nich czyli \textbf{ Algorytm Knutha}
+  Rozkład Poissona modeluje zdarzenia rzadkie. Jest on parameryzowany zmienną $\lambda$ która jest równa oczekiwanej liczbie zdarzeń w danym przedziale czasu. Jest wiele algorytmów generujących ten rozkład na potrzeby naszego generatora wystaczy zastosować najprostrzy z nich czyli \textbf{ Algorytm Knutha}
   \begin{lstlisting}[language=Python, caption=Metoda rozkładu Poissona]
     def poissonDistribution(self, lambdapoiss):
         limit = math.exp(-lambdapoiss)
@@ -224,39 +223,6 @@ Kolejny wyraz tworzymy po przez pomnożenie poprzedniego przez jakiś skalar. Gd
 \end{frame}
 \begin{frame}
   \frametitle{Rozkład normalny}
-  Rozkład normalny jest jednym z najważniejszych rozkładów prawdopodobieństwa, odgrywający ważną rolę w statystyce. Przyczyną jego znaczenia jest częstość występowania w naturze. Jeśli jakaś wielkość jest sumą lub średnią bardzo wielu drobnych losowych czynników, to niezależnie od rozkładu każdego z tych czynników jej rozkład będzie zbliżony do normalnego (na podstawie CTG).
-
-  Jest wiele algorytmów aby uzyskać rozkład normalny. Ja w swojej implementacji zastosowałem polarny algorytm Boxa-Mullera nazwywany inaczej sposobem polarnym.
-  Polega on na wylosowaniu dwóch zmiennych $(x,y)$ z przedziału $(-1,1)$ tak aby $0<x^2+y^2<1$ a następnie należy podstawić do wzoru:
-  \begin{equation*}
-    x\sqrt{\frac{-2\ln{s}}{s}} \:\: \:  lub \:\: \:  y\sqrt{\frac{-2\ln{s}}{s}}
-  \end{equation*}
-  wzory te stosujemy na zmianę dlatego przyda się drobna modyfikacja obecnego genereatora o dodanie nowej zmiennej którą będziemy zmieniać w zależności o zastosowanego wzoru.
-\end{frame}
-\begin{frame} [containsverbatim]
-  \frametitle{Rozkład normalny - kod źródłowy}
-  \begin{lstlisting}[language=Python, caption=Metoda rozkładu normalnego]
-    def normalDistribution(self):
-    if(self.whichOne == 1):
-        self.whichOne = 0
-        return self.prevValue
-    else:
-        x = self.uniformDistribution()*2-1
-        y=self.uniformDistribution()*2-1
-        s=x*x+y*y
-        while (s>=1 or s==0):
-            x = self.uniformDistribution()*2-1
-            y=self.uniformDistribution()*2-1
-            s=x*x+y*y
-        s=math.sqrt((math.log(s)*(-2))/s)
-        self.prevValue=y*s
-        self.whichOne=1
-    return x*s 
-  \end{lstlisting}
-\end{frame}
-\section{Test poprawności generatora}
-\begin{frame}
-  \frametitle{Test poprawności generatora - wprowadzenie}
 \end{frame}
 \section{Sources}
 \begin{frame}
@@ -269,7 +235,6 @@ Kolejny wyraz tworzymy po przez pomnożenie poprzedniego przez jakiś skalar. Gd
     \item \url{http://staff.iiar.pwr.wroc.pl/grzegorz.mzyk/kmi/kmi03.pdf}
     \item \url{https://math.stackexchange.com/questions/785188/simple-algorithm-for-generating-poisson-distribution/785200}
     \item \url{https://pl.wikipedia.org/wiki/Rozkład_wykładniczy}
-    \item \item \url{https://pl.xcv.wiki/wiki/Marsaglia_polar_method}
   \end{itemize}
 \end{frame}
 \end{document}

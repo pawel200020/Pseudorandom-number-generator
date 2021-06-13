@@ -146,7 +146,7 @@ Kolejny wyraz tworzymy po przez pomnożenie poprzedniego przez jakiś skalar. Gd
 \section{Modyfikacje generatora dla uzyskania zadanych rozkładów}
 \begin{frame}[containsverbatim]
   \frametitle{Rozkład jednostajny}
-  Aby uzyskać liczby z rozkładu jednostajnego na przedziale $[0,1]$ wystarczy podzielić przez ustalone wcześniej $m=4294967296$, zauważmy że po takiej operacji największą liczbą możliwą do uzyskania będzie 1, natomiast pozostałe liczby będą należały to przedziału $[0,1]$.
+  Aby uzyskać liczby z rozkładu jednostajnego na przedziale $[0,1]$ wystarczy podzielić przez ustalone wcześniej $m=4294967296$, zauważmy że po takiej operacji liczby będą należały to przedziału $[0,1]$.
   \begin{lstlisting}[language=Python, caption=Metoda rozkładu jednostajnego]
     def uniformDistribution(self):
         return self.generateRandom()/self.m
@@ -155,11 +155,11 @@ Kolejny wyraz tworzymy po przez pomnożenie poprzedniego przez jakiś skalar. Gd
 \begin{frame}[containsverbatim]
   
   \frametitle{Rozkład Bernoulliego}
-  Rozkład Bernoulliego, jest rozkładem dwupunktowym, aby uzyskać ten rozkład skorzystam z metody którą przygotowałem dla rozkładu jednostajnego. Ustalmy dowolne $P\in [0,1]$. Jeśli wylosowana liczba przez metodę rozkładu jednostajnego będzie mniejsza od p to zwrócimy 0, w przeciwnym razie 1.
+  Rozkład Bernoulliego, jest rozkładem dwupunktowym, aby uzyskać ten rozkład skorzystam z metody którą przygotowałem dla rozkładu jednostajnego. Ustalmy dowolne $P\in [0,1]$. Jeśli wylosowana liczba przez metodę rozkładu jednostajnego będzie większa od p to zwrócimy 0, w przeciwnym razie 1.
   \begin{lstlisting}[language=Python, caption=Metoda rozkładu Bernoulliego]
     def bernoulliDistribution(self, probability):
         rand = self.uniformDistribution()
-        if ( rand<= probability):
+        if ( rand>= probability):
             return 0
         else:
             return 1
@@ -269,8 +269,71 @@ Kolejny wyraz tworzymy po przez pomnożenie poprzedniego przez jakiś skalar. Gd
   Należy ukształtować dane w taki sposób aby każda próbka miała co najmniej 5 elementów, przyjmijmy także powszechnie stosowany 5\% stopień akceptacji.
 \end{frame}
 \begin{frame}
-  \frametitle{Generator rozkładu jednostajnego}
-  
+  \frametitle{Test $\chi^2$}
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.95\textwidth]{assets/chi.png}
+      \caption{tabela rozkładu chi kwadrat}
+  \end{figure}
+\end{frame}
+\begin{frame}
+  \frametitle{Rezultaty testu dla rozkładu jednostajnego}
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{assets/jednostajnychi.PNG}
+      \caption{Rezultaty przeprowadzonego testu przy 6 stopniach swobody}
+  \end{figure}
+  nasza suma testu $\chi^2 = 4.605633802816902$ z tabelki możemy odczytać, że znajdujemy się w przedziale $[0.8, 0.5]$ zatem przy $5\%$ stopniu akceptacji nie możemy odrzucić tezy zerowej. Nie jest to być może wynik bardzo zadawalający lecz wciąż odcinamy dość duże pole pod wykresem funkcji testu.
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.3\textwidth]{assets/chart.png}
+      \caption{wykres testu}
+  \end{figure}
+\end{frame}
+\begin{frame}
+  \frametitle{Rezultaty testu dla rozkładu Bernoulliego}
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{assets/binom.PNG}
+      \caption{Rezultaty przeprowadzonego testu przy 1 stopniu swobody}
+  \end{figure}
+  nasza suma testu $\chi^2 = 0.15$ z tabelki możemy odczytać, że znajdujemy się w przedziale $[0.8, 0.5]$ zatem przy $5\%$ stopniu akceptacji nie możemy odrzucić tezy zerowej.
+\end{frame}
+\begin{frame}
+  \frametitle{Rezultaty testu dla rozkładu Dwumianowego}
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{assets/dwumian.PNG}
+      \caption{Rezultaty przeprowadzonego testu przy 10 stopniach swobody}
+  \end{figure}
+  nasza suma testu $\chi^2 = 12.458520109015799$ z tabelki możemy odczytać, że znajdujemy się w przedziale $[0.2, 0.3]$ zatem przy $5\%$ stopniu akceptacji nie możemy odrzucić tezy zerowej.
+\end{frame}
+\begin{frame}
+  \frametitle{Rezultaty testu dla rozkładu Poissona}
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.4\textwidth]{assets/poisson.PNG}
+      \caption{Rezultaty przeprowadzonego testu przy 14 stopniach swobody}
+  \end{figure}
+  nasza suma testu $\chi^2 = 13.759110251832714$ z tabelki możemy odczytać, że znajdujemy się w przedziale $[0.8, 0.5]$ zatem przy $5\%$ stopniu akceptacji nie możemy odrzucić tezy zerowej.
+\end{frame}
+\begin{frame}
+  \frametitle{Rezultaty testu dla rozkładu Wykładniczego}
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.3\textwidth]{assets/wykl.PNG}
+      \caption{Rezultaty przeprowadzonego testu przy 29 stopniach swobody}
+  \end{figure}
+  nasza suma testu $\chi^2 = 40.03574762305712$ z tabelki możemy odczytać, że znajdujemy się w przedziale $[0.1, 0.05)$ zatem przy $5\%$ stopniu akceptacji nie możemy odrzucić tezy zerowej.
+\end{frame}
+\begin{frame}
+  \frametitle{Rezultaty testu dla rozkładu Normalnego}
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.3\textwidth]{assets/norm.PNG}
+      \caption{Rezultaty przeprowadzonego testu przy 29 stopniach swobody}
+  \end{figure}
+  nasza suma testu $\chi^2 = 31.44101220198305$ z tabelki możemy odczytać, że znajdujemy się w przedziale $[0.5, 0.3]$ zatem przy $5\%$ stopniu akceptacji nie możemy odrzucić tezy zerowej.
 \end{frame}
 \section{Sources}
 \begin{frame}
@@ -283,7 +346,9 @@ Kolejny wyraz tworzymy po przez pomnożenie poprzedniego przez jakiś skalar. Gd
     \item \url{http://staff.iiar.pwr.wroc.pl/grzegorz.mzyk/kmi/kmi03.pdf}
     \item \url{https://math.stackexchange.com/questions/785188/simple-algorithm-for-generating-poisson-distribution/785200}
     \item \url{https://pl.wikipedia.org/wiki/Rozkład_wykładniczy}
-    \item \item \url{https://pl.xcv.wiki/wiki/Marsaglia_polar_method}
+    \item \url{https://pl.xcv.wiki/wiki/Marsaglia_polar_method}
+    \item \url{https://www.naukowiec.org/tablice/statystyka/rozklad-chi-kwadrat_247.html}
+    \item wykład Rachunek Prawdopodobieństa i Statystyka Prof. Adam Roman
   \end{itemize}
 \end{frame}
 \end{document}

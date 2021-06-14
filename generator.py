@@ -70,7 +70,7 @@ class generator:
 #======================================przedstawienie działania podstawowej wersji generatora===========================
 # a = arr.array('d')
 # object = generator(2)
-# HowManyResults=1000
+# HowManyResults=100000
 # for i in range(HowManyResults):
 #     a.append(object.generateRandom())
 
@@ -83,7 +83,7 @@ class generator:
 #========================przedstawienie działania generatora dla rozkładu jednostajnego==================================
 # b = arr.array('d')
 # object = generator(2)
-# HowManyResults= 10000
+# HowManyResults= 100
 
 # for i in range(HowManyResults):
 #     b.append(object.uniformDistribution()) 
@@ -129,7 +129,7 @@ class generator:
 #==========================================przedstawienie działania generatora rozkładu Bernuliego=======================
 # c = arr.array('d')
 # object = generator(2)
-# HowManyResults=1000
+# HowManyResults=100
 # probablity = 0.4
 
 # for i in range(HowManyResults):
@@ -171,7 +171,7 @@ class generator:
 #==========================================przedstawienie działania generatora rozkładu dwumianowego=====================
 # d = arr.array('d')
 # object = generator(2)
-# HowManyResults=1000
+# HowManyResults=100
 # probablity = 0.5
 # samples=10
 
@@ -215,7 +215,7 @@ class generator:
 
 # e = arr.array('d')
 # object = generator(2)
-# HowManyResults=100000
+# HowManyResults=100
 # lambdapoiss=5
 
 # for i in range(HowManyResults):
@@ -259,7 +259,7 @@ class generator:
 #=========================================================================przedstawienie działania Rozkład Wykładniczy===================================
 # f = arr.array('d')
 # object = generator(2)
-# HowManyResults=1000
+# HowManyResults=100
 
 # for i in range(HowManyResults):
 #     f.append(object.exponentialDistribution())
@@ -305,7 +305,7 @@ class generator:
 #=========================================================================prezentacja działania Rozkład Normalny===========================================
 # g = arr.array('d')
 # object = generator(2)
-# HowManyResults=1000
+# HowManyResults=100
 # for i in range(HowManyResults):
 #     g.append(object.normalDistribution())
 #     print(g[i])

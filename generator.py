@@ -69,8 +69,8 @@ class generator:
 
 #======================================przedstawienie działania podstawowej wersji generatora===========================
 # a = arr.array('d')
-# object = generator(2)
-# HowManyResults=100000
+# object = generator(1777)
+# HowManyResults=1000
 # for i in range(HowManyResults):
 #     a.append(object.generateRandom())
 
@@ -83,11 +83,11 @@ class generator:
 #========================przedstawienie działania generatora dla rozkładu jednostajnego==================================
 # b = arr.array('d')
 # object = generator(2)
-# HowManyResults= 100
+# HowManyResults= 100000
 
 # for i in range(HowManyResults):
 #     b.append(object.uniformDistribution()) 
-#     print(b[i])
+#     #print(b[i])
     
 # plt.hist(b, bins=10)
 # plt.show()
@@ -129,44 +129,44 @@ class generator:
 #==========================================przedstawienie działania generatora rozkładu Bernuliego=======================
 # c = arr.array('d')
 # object = generator(2)
-# HowManyResults=100
+# HowManyResults=10000
 # probablity = 0.4
 
 # for i in range(HowManyResults):
 #     c.append(object.bernoulliDistribution(probablity))
-#     print(c[i])
+#     #print(c[i])
 
 # plt.hist(c, bins=2)
 # plt.show()
 
 #==========================================Test chi kwadrat Rozkład Bernuliego===========================================
-# c = arr.array('d')
-# object = generator(2)
-# HowManyResults=1000
-# probablity = 0.4
-# bins =2
-# quantity = [0] * bins
-# expected = [0] * bins
+c = arr.array('d')
+object = generator(2)
+HowManyResults=1000
+probablity = 0.4
+bins =2
+quantity = [0] * bins
+expected = [0] * bins
 
-# expected[1]=math.floor( HowManyResults*probablity)
-# expected[0]=HowManyResults-expected[1]
+expected[1]=math.floor( HowManyResults*probablity)
+expected[0]=HowManyResults-expected[1]
 
+for i in range(HowManyResults):
+    c.append(object.bernoulliDistribution(probablity))
+    if(c[i]==0):
+        quantity[0]+=1
+    else:
+        quantity[1]+=1
+print("expected    quantity")
+chiKwardrat = math.pow((quantity[0]-expected[0]),2)/expected[0] + math.pow((quantity[1]-expected[1]),2)/expected[1]
+print(expected[0],quantity[0],sep='            ')
+print(expected[1],quantity[1],sep='            ')
+print("suma testu chi kwadrat=", chiKwardrat,sep=' ')
 # for i in range(HowManyResults):
-#     c.append(object.bernoulliDistribution(probablity))
-#     if(c[i]==0):
-#         quantity[0]+=1
-#     else:
-#         quantity[1]+=1
-# print("expected    quantity")
-# chiKwardrat = math.pow((quantity[0]-expected[0]),2)/expected[0] + math.pow((quantity[1]-expected[1]),2)/expected[1]
-# print(expected[0],quantity[0],sep='            ')
-# print(expected[1],quantity[1],sep='            ')
-# print("suma testu chi kwadrat=", chiKwardrat,sep=' ')
-# # for i in range(HowManyResults):
-# #     print(c[i])
+#     print(c[i])
 
-# plt.hist(c, bins=2)
-# plt.show()
+plt.hist(c, bins=2)
+plt.show()
 
 #==========================================przedstawienie działania generatora rozkładu dwumianowego=====================
 # d = arr.array('d')
@@ -305,10 +305,10 @@ class generator:
 #=========================================================================prezentacja działania Rozkład Normalny===========================================
 # g = arr.array('d')
 # object = generator(2)
-# HowManyResults=100
+# HowManyResults=10000
 # for i in range(HowManyResults):
 #     g.append(object.normalDistribution())
-#     print(g[i])
+#     #print(g[i])
 
 # plt.hist(g, bins=20)
 # plt.show()
